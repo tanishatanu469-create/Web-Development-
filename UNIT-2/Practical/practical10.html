@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Div and span layout</title>
+    <style>
+        /*Universal reset */
+        * { 
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 1em;
+            background-color: #f5f5f5;
+        }
+
+        /* Layout using divs */
+        .container {
+            width: 90%;
+            margin: auto;
+            background-color: white;
+            padding: 1 em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header,
+        .footer {
+            background-color: #0077cc;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        .content {
+            padding: 1em;
+        }
+
+        /* Styling span for inline emphasis */
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1> My Simple Page </h1>
+        </div>
+
+        <div class="content">
+            <p>Welcome to my webpage. This is a <span class="highlight">highlight</span>
+               word using a span element</p>
+            <p>Divs are used for layout blocks like header, content, and footer.</p>
+        </div>
+
+        <div class="footer">
+            <p>Designed by G.Tanisha</p>
+        </div>
+    </div>
+
+    
+</body>
+</html>

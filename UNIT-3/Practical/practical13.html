@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Integrated JS/CSS Dashboard</title>
+    <style>
+        /* 1. UNIVERSAL SELECTOR & FLEXIBLE UNITS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            font-size: 1rem; /* 16px base */
+            padding: 2rem;
+            color: #333;
+        }
+
+        /* 2. ID SELECTOR for the main container */
+        #main-app {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 3. GROUPING SELECTOR */
+        h1, h2 {
+            color: #2d3436;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 4. CLASS SELECTOR (The "Box") */
+        .card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        /* 5. DESCENDANT SELECTOR */
+        .card button {
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .card button:hover { background: #74b9ff; }
+
+        /* Flexible Span for specific styling */
+        .highlight { color: #d63031; font-weight: bold; }
+
+        /* 6. RESPONSIVE DESIGN (Mobile-First) */
+        .flex-container {
+            display: flex;
+            flex-direction: column; /* Stacked on mobile */
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .flex-container {
+                flex-direction: row; /* Side-by-side on desktop */
+                align-items: center;
+            }
+        }
+
+        #output-console {
+            background: #2d3436;
+            color: #00cec9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-app">
+        <h1>Dev <span class="highlight">Dashboard</span></h1>
+        <p>This page uses 100% responsive units and scope-safe JavaScript.</p>
+
+        <section class="card">
+            <h2>Arithmetic & Loops</h2>
+            <div class="flex-container">
+                <input type="number" id="numInput" placeholder="Enter a number" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                <button onclick="masterFunction()">Process Number</button>
+            </div>
+
+            <div id="output-console">
+                Results will appear here...
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // GLOBAL SCOPE (const)
+        const APP_TITLE = "Logic Processor";
+
+        // USER-DEFINED FUNCTION (Invoked by button)
+        function masterFunction() {
+            // FUNCTION SCOPE (let)
+            let rawValue = document.getElementById('numInput').value;
+            let display = document.getElementById('output-console');
+
+            // 1. CONDITIONAL STATEMENT
+            if (rawValue === "") {
+                display.innerHTML = "Error: Input is empty!";
+                return;
+            }
+
+            const num = parseFloat(rawValue);
+            let resultHTML = `<strong>${APP_TITLE}:</strong><br>`;
+
+            // 2. ARITHMETIC OPERATION
+            let square = num * num;
+            resultHTML += `Square of ${num} is: ${square}<br><br>`;
+
+            // 3. FOR LOOP (Generating a sequence)
+            resultHTML += `<em>Counting from ${num} to ${num + 3}:</em><br>`;
+            for (let i = 0; i <= 3; i++) {
+                let current = num + i;
+                // Nested Conditional
+                let parity = (current % 2 === 0) ? "Even" : "Odd";
+                resultHTML += `Step ${i}: ${current} is ${parity}<br>`;
+            }
+
+            // 4. SCOPE DEMONSTRATION (Block Scope)
+            if (true) {
+                var globalLeak = "I am a var (I leak!)";
+                let blockSecret = "I am a let (I'm hidden!)";
+            }
+
+            resultHTML += `<br>Scope Test (var): ${globalLeak}<br>`;
+            
+            try {
+                resultHTML += `Scope Test (let): ${blockSecret}`;
+            } catch(e) {
+                resultHTML += `Scope Test (let): <span style="color:#ff7675">ReferenceError (Variable is blocked)</span>`;
+            }
+
+            display.innerHTML = resultHTML;
+        }
+    </script>
+</body>
+</html>

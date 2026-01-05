@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Event Listener Dashboard</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { padding: 2rem; background: #fdfdfd; display: flex; flex-direction: column; align-items: center; }
+        
+        #track-pad {
+            width: 100%;
+            max-width: 500px;
+            height: 200px;
+            background: #dfe6e9;
+            border: 2px dashed #b2bec3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            cursor: crosshair;
+        }
+
+        .status-box {
+            background: #2d3436;
+            color: #55efc4;
+            padding: 1rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            font-family: monospace;
+        }
+
+        .controls { margin-top: 1rem; }
+        button { padding: 10px 20px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; }
+        .locked { background: #ff7675; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <h1>Event Listener <span style="color:#0984e3">Interactive</span></h1>
+    
+    <div id="track-pad">Move mouse here or type anywhere</div>
+
+    <div class="status-box">
+        <div>Mouse: <span id="m-pos">X: 0, Y: 0</span></div>
+        <div>Key: <span id="k-val">None</span></div>
+    </div>
+
+    <div class="controls">
+        <button id="lock-btn">Lock Interactions</button>
+    </div>
+
+    <script>
+        const pad = document.getElementById('track-pad');
+        const mPos = document.getElementById('m-pos');
+        const kVal = document.getElementById('k-val');
+        const lockBtn = document.getElementById('lock-btn');
+
+        // Define functions separately so they can be removed later
+        function handleMouseMove(e) {
+            mPos.innerText = `X: ${e.offsetX}, Y: ${e.offsetY}`;
+            pad.style.backgroundColor = `rgba(9, 132, 227, ${e.offsetX / 500})`;
+        }
+
+        function handleKeyPress(e) {
+            kVal.innerText = `${e.key} (Code: ${e.keyCode})`;
+        }
+
+        // 1. Adding Event Listeners
+        pad.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('keydown', handleKeyPress);
+
+        // 2. Logic to Remove Event Listeners
+        lockBtn.addEventListener('click', function() {
+            // Remove the listeners
+            pad.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('keydown', handleKeyPress);
+            
+            // Update UI
+            pad.innerText = "Interactions Locked";
+            pad.style.background = "#fab1a0";
+            lockBtn.innerText = "Interactions Disabled";
+            lockBtn.classList.add('locked');
+            lockBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>

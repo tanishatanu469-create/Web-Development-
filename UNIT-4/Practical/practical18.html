@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dynamic DOM Manipulation</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 2rem; background: #f8f9fa; }
+        #container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 15px; cursor: pointer; border: none; border-radius: 5px; background: #007bff; color: white; }
+        
+        ul { list-style: none; padding: 0; }
+        li { 
+            background: #f1f1f1; 
+            margin-bottom: 8px; 
+            padding: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-radius: 5px;
+            animation: fadeIn 0.3s ease;
+        }
+        .delete-btn { background: #dc3545; font-size: 12px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <h2>Dynamic List</h2>
+    <div class="input-group">
+        <input type="text" id="itemInput" placeholder="Enter item name...">
+        <button id="addBtn">Add Item</button>
+    </div>
+    <ul id="itemList"></ul>
+</div>
+
+<script>
+    const addBtn = document.getElementById('addBtn');
+    const input = document.getElementById('itemInput');
+    const list = document.getElementById('itemList');
+
+    // CREATE and APPEND
+    addBtn.addEventListener('click', () => {
+        const text = input.value.trim();
+        if (text === "") return;
+
+        // 1. Create the <li> element
+        const li = document.createElement('li');
+        
+        // 2. Modify content using innerHTML or textContent
+        li.innerHTML = `
+            <span>${text}</span>
+            <button class="delete-btn">Remove</button>
+        `;
+
+        // 3. Append the new node to the <ul>
+        list.appendChild(li);
+
+        // 4. Clear input
+        input.value = "";
+
+        // REMOVE functionality
+        // We find the button inside the newly created LI
+        const deleteBtn = li.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', () => {
+            // Option A: Parent removes child
+            // list.removeChild(li);
+            
+            // Option B: Direct remove (modern)
+            li.remove();
+        });
+    });
+
+    // KEYBOARD EVENT (Optional extra)
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') addBtn.click();
+    });
+</script>
+
+</body>
+</html>

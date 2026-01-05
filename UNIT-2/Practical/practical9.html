@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Responsive Design</title>
+    <style>
+        /* Mobile-first base styles */
+        body {
+             margin: 0;
+             padding: 1em;
+             font-family: san-serif;
+             background-color: #f0f0f0;
+        }
+
+        header {
+            text-align: center;
+            padding: 1em;
+            background-color: #0077cc;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+        .box {
+            background-color: white;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Media query for tablets and up */
+        @media (min-widthL: 600px) {
+            .container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .box {
+                flex: 1 1 45%;
+            }
+        }
+        /* Media query for desktops and up */
+        @media (min-width: 900px) {
+            .box {
+                flex: 1 1 30%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Responsive Webpage</h1>
+        <p>Resize the browser to see layout changes</p>
+    </header>
+
+    <main class="container">
+        <div class="box">Box 1: Content goes here</div>
+        <div class="box">Box 2: More content</div>
+        <div class="box">Box 3: Even more content</div>
+    </main>
+    
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Integrated Web Dashboard</title>
+    <style>
+        /* 1. UNIVERSAL SELECTOR & FLEXIBLE UNITS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 2rem; /* Flexible unit */
+            font-size: 1rem;
+        }
+
+        /* 2. ID SELECTOR & LAYOUT DIV */
+        #dashboard-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* 3. GROUPING SELECTOR */
+        h1, h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        /* 4. CLASS SELECTOR for Cards */
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* 5. DESCENDANT SELECTOR */
+        .card input {
+            padding: 10px;
+            width: 120px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .highlight {
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* 6. MEDIA QUERIES (Mobile-First) */
+        .card-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .card-inner {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #log-output {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="dashboard-wrapper">
+        <header>
+            <h1>JS & CSS <span class="highlight">Integration</span></h1>
+            <p>Enter a base number to generate a sequence report.</p>
+        </header>
+
+        <main class="card">
+            <h2>Arithmetic Engine</h2>
+            <div class="card-inner">
+                <input type="number" id="userInput" placeholder="Enter number">
+                <button onclick="runAnalysis()">Generate Report</button>
+            </div>
+            
+            <div id="log-output">
+                Waiting for input...
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function runAnalysis() {
+            const input = document.getElementById('userInput').value;
+            const log = document.getElementById('log-output');
+            
+            // 1. Conditional Statement
+            if (input === "") {
+                log.innerHTML = "Error: Please enter a value.";
+                return;
+            }
+
+            const num = parseFloat(input);
+            let content = `Target Number: ${num}<br>---<br>`;
+
+            // 2. Arithmetic Operation
+            const square = num * num;
+            content += `Square of ${num} is: ${square}<br><br>`;
+
+            // 3. For Loop & Conditional inside
+            content += `<strong>Sequence Analysis:</strong><br>`;
+            for (let i = 1; i <= 5; i++) {
+                let result = num + i;
+                
+                // Logic: check if the new number is even or odd
+                let type = (result % 2 === 0) ? "Even" : "Odd";
+                
+                content += `Step ${i}: ${num} + ${i} = ${result} (${type})<br>`;
+            }
+
+            // 4. While Loop (Countdown demonstration)
+            content += `<br><strong>Countdown from ${num}:</strong><br>`;
+            let timer = Math.floor(num);
+            if (timer > 10) timer = 10; // Cap it for the display
+
+            while (timer > 0) {
+                content += timer + "... ";
+                timer--;
+            }
+            content += "Blast off!";
+
+            log.innerHTML = content;
+        }
+    </script>
+</body>
+</html>

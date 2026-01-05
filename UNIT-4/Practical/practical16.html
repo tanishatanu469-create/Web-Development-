@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ultimate DOM & Class Integration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            padding: 2rem;
+            background-color: #f5f6fa;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        .dark-theme {
+            background-color: #2f3640;
+            color: #f5f6fa;
+        }
+
+        #app-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            color: #2f3640;
+        }
+
+        .dark-theme .panel {
+            background: #353b48;
+            color: white;
+            border: 1px solid #718093;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .controls {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            background: #9c88ff;
+            color: white;
+        }
+
+        button:hover { background: #8c7ae6; }
+
+        #report-display {
+            margin-top: 20px;
+            padding: 1rem;
+            border-left: 4px solid #00a8ff;
+            background: #dcdde1;
+            border-radius: 4px;
+        }
+
+        .dark-theme #report-display {
+            background: #2f3640;
+            color: #00a8ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-wrapper">
+        <h1>DOM <span style="color:#9c88ff">Interface</span></h1>
+        
+        <div class="controls">
+            <button onclick="changeTheme()">Toggle Theme</button>
+            <button onclick="toggleVisibility()">Show/Hide Report</button>
+        </div>
+
+        <div class="panel">
+            <h2>System Report</h2>
+            <p>Enter a value to update the live DOM structure.</p>
+            <br>
+            <input type="text" id="dataInput" placeholder="Type something..." style="padding:10px; width:100%; margin-bottom:10px;">
+            <button onclick="generateContent()" style="width:100%; background:#00a8ff;">Generate HTML Content</button>
+
+            <div id="report-display" class="hidden">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        function changeTheme() {
+            // Toggling a class on the body to change global styles
+            document.body.classList.toggle('dark-theme');
+        }
+
+        function toggleVisibility() {
+            // Using querySelector to find the display box
+            const report = document.querySelector('#report-display');
+            
+            // Toggling the 'hidden' class (display: none)
+            report.classList.toggle('hidden');
+        }
+
+        function generateContent() {
+            // Selection via getElementById
+            const inputVal = document.getElementById('dataInput').value;
+            const display = document.getElementById('report-display');
+
+            if (inputVal.trim() === "") {
+                alert("Please enter some data first!");
+                return;
+            }
+
+            // Using innerHTML to inject new elements into the DOM
+            display.innerHTML = `
+                <h3>Report Generated</h3>
+                <p>User Input: <strong>${inputVal}</strong></p>
+                <p>Timestamp: <em>${new Date().toLocaleTimeString()}</em></p>
+            `;
+
+            // Ensure it is visible after generating
+            display.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Seletors</title>
+    <style>
+        /* Universal Selector */
+       * {
+            box-sizing: "border-box";
+            font-family: Arial, sans-serif;
+        }
+
+        /* ID Selector */
+        #main-title {
+            color: darkblue;
+            text-align: center;
+        }
+
+        /* Class Selector */
+        .highlight {
+            background-color: yellow;
+            padding: 10px;
+        }
+
+        /* Descendant Selector */
+        div p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Group Selector */
+        h2,
+        h3 {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="main-title">Welcome to My Webpage</h1>
+
+    <h2>About Me</h2>
+    <h3>My Interest</h3>
+
+    <div>
+        <p>I Love coding</p>
+        <p class="highlight">I Love to explore new things.</p>
+    </div>
+    <p>Web tech is my fav Subject</p>
+</body>
+</html>

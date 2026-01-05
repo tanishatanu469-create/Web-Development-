@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JS Arithmetic Tool</title>
+    <style>
+        /* Basic layout using DIVs */
+        .calc-card {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button-group {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #result-display {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            min-height: 50px;
+        }
+
+        .res-value {
+            color: #e67e22;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calc-card">
+        <h2>Simple Arithmetic</h2>
+        
+        <input type="number" id="num1" placeholder="Enter first number">
+        <input type="number" id="num2" placeholder="Enter second number">
+
+        <div class="button-group">
+            <button onclick="calculate('+')">+</button>
+            <button onclick="calculate('-')">-</button>
+            <button onclick="calculate('*')">×</button>
+            <button onclick="calculate('/')">÷</button>
+        </div>
+
+        <div id="result-display">
+            Result: <span id="result" class="res-value">0</span>
+        </div>
+    </div>
+
+    <script>
+        function calculate(operator) {
+            // 1. Get values from the inputs
+            // We use parseFloat to turn the text strings into numbers
+            const val1 = parseFloat(document.getElementById('num1').value);
+            const val2 = parseFloat(document.getElementById('num2').value);
+            const resultSpan = document.getElementById('result');
+
+            // 2. Validate input
+            if (isNaN(val1) || isNaN(val2)) {
+                resultSpan.innerText = "Error: Enter numbers";
+                return;
+            }
+
+            // 3. Perform the arithmetic
+            let total = 0;
+            if (operator === '+') total = val1 + val2;
+            if (operator === '-') total = val1 - val2;
+            if (operator === '*') total = val1 * val2;
+            if (operator === '/') {
+                total = val2 !== 0 ? val1 / val2 : "Cannot divide by zero";
+            }
+
+            // 4. Update the UI with the result
+            resultSpan.innerText = total;
+        }
+    </script>
+
+</body>
+</html>

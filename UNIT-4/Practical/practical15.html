@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DOM Manipulation Demo</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; }
+        .box { 
+            border: 2px dashed #ccc; 
+            padding: 1rem; 
+            margin-top: 1rem; 
+            border-radius: 8px;
+        }
+        .highlight { color: #e67e22; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1 id="main-title">Original Title</h1>
+    
+    <div class="content-area">
+        <p>This is the first paragraph in the content area.</p>
+    </div>
+
+    <button onclick="updatePage()">Update Content</button>
+
+    <div id="output-box" class="box">
+        The result will appear here.
+    </div>
+
+    <script>
+        function updatePage() {
+            // 1. Using getElementById
+            const title = document.getElementById('main-title');
+            title.style.color = 'blue';
+            title.innerText = 'Title Updated via ID!';
+
+            // 2. Using querySelector
+            // Targets the first <p> inside the .content-area class
+            const firstPara = document.querySelector('.content-area p');
+            firstPara.style.fontStyle = 'italic';
+
+            // 3. Using innerHTML
+            const display = document.getElementById('output-box');
+            display.innerHTML = "New content added with a <span class='highlight'>styled span</span> element.";
+        }
+    </script>
+
+</body>
+</html>
