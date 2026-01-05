@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Table Layout Example</title>
+</head>
+
+<body>
+
+    <h1>Student Timetable</h1>
+
+    <!-- Table with caption -->
+    <table border="1" width="80%" align="center" cellpadding="10">
+        <caption><strong>Weekly Class Schedule</strong></caption>
+
+        <!-- Table Header -->
+        <tr>
+            <th>Day</th>
+            <th>9:00 - 10:00</th>
+            <th>10:00 - 11:00</th>
+            <th>11:00 - 12:00</th>
+            <th>Lunch</th>
+            <th>1:00 - 2:00</th>
+        </tr>
+
+        <!-- Monday Row -->
+        <tr>
+            <td align="center"><strong>Monday</strong></td>
+            <td align="center">Math</td>
+            <td align="center">Physics</td>
+            <td align="center">Chemistry</td>
+            <td rowspan="5" align="center"><em>12:00 - 1:00</em><br>Lunch Break</td> <!-- Merged vertically -->
+            <td align="center">English</td>
+        </tr>
+
+        <!-- Tuesday Row -->
+        <tr>
+            <td align="center"><strong>Tuesday</strong></td>
+            <td align="center">Biology</td>
+            <td colspan="2" align="center">Computer Lab</td> <!-- Merged horizontally -->
+            <td align="center">History</td>
+        </tr>
+
+        <!-- Wednesday Row -->
+        <tr>
+            <td align="center"><strong>Wednesday</strong></td>
+            <td align="center">Math</td>
+            <td align="center">Physics</td>
+            <td align="center">Chemistry</td>
+            <td align="center">English</td>
+        </tr>
+
+        <!-- Thursday Row -->
+        <tr>
+            <td align="center"><strong>Thursday</strong></td>
+            <td colspan="3" align="center">Project Work</td> <!-- Merged horizontally -->
+            <td align="center">Sports</td>
+        </tr>
+
+        <!-- Friday Row -->
+        <tr>
+            <td align="center"><strong>Friday</strong></td>
+            <td align="center">Biology</td>
+            <td align="center">Math</td>
+            <td align="center">Physics</td>
+            <td align="center">Art</td>
+        </tr>
+    </table>
+
+</body>
+</html>
